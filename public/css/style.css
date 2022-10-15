@@ -1,0 +1,111 @@
+@charset "utf-8";
+
+html {}
+
+body {}
+
+/* header */
+header {
+    background: #3C4767;
+    display: flex;
+}
+
+/* main content */
+#row {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#container {
+    flex: 0 0 80%;
+}
+
+#side-bar {
+    flex: 0 0 19%;
+    border-left: 1px solid #6C6C6C;
+}
+
+#head {
+    display: flex;
+    /* width: 200px; */
+}
+
+.icon {
+    border-radius: 50%;
+}
+
+/* アコーディオンメニューの実装 */
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.gnav {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.gnav .gnav-contents .menu {
+    display: right;
+    text-align: center;
+    cursor: pointer;
+}
+
+.gnav .gnav-contents .menu div {
+    padding: 10px 0;
+}
+
+.gnav .gnav-contents .menu .dropdown-menu {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+.gnav .gnav-contents .menu .dropdown-menu li {
+    padding: 10px 0;
+}
+
+.tweet {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    border-bottom: 3px solid #cccccc;
+    box-sizing: border-box;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    background: #fff;
+    margin: 0.5em 0;
+    line-height: 1.5;
+    height: 6em;
+}
+
+.post-img {
+    border: none;
+    background: none;
+}
+
+.hide-area {
+    display: none;
+}   /* 非表示 */
+
+.post-form {
+    display: flex;
+}
+
+.user {
+    display: flex;
+
+}
+
+.follower-icon {
+    display: flex;
+}
