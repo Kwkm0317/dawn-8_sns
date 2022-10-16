@@ -110,6 +110,7 @@ class PostsController extends Controller
         ->where('id', $login_user->id)
         ->update([
             'username' => $login_user['username'],
+            'bio' => $login_user['bio'],
             'mail' => $login_user['mail']
         ]);
 

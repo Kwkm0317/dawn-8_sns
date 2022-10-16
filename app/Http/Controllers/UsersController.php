@@ -11,13 +11,18 @@ class UsersController extends Controller
 {
     //
     public function profile($id){
-        $user = DB::table('users')
+        $users = DB::table('users')
         ->whereIn('id', $id)
         ->get();
 
-        return view('users.profile', [
-            'user' => $user
-        ]);
+        $posts = DB::table('posts')
+        ->join('users','posts.user_id','=','users.id')
+        ->whereIn('user_id',$id)
+        ->select('posts.posts','posts.created_at as created_at','users.username','users.images')
+        ->get();
+
+
+        return view('users.profile', compact('posts', 'users'));
     }
     // 検索機能
     public function search(Request $request, User $user){
