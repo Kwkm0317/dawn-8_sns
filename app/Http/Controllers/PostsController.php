@@ -103,4 +103,20 @@ class PostsController extends Controller
         return redirect('/top');
     }
 
+    // ログインしている人のプロフィールを表示させるためのところ
+    public function profile(){
+        $login_user = Auth::user();
+        $update = DB::table('users')
+        ->where('id', $login_user->id)
+        ->update([
+            'username' => $login_user['username'],
+            'mail' => $login_user['mail']
+        ]);
+
+        return view('posts.profile', [
+            'login_user' => $login_user,
+            'update' => $update
+        ]);
+    }
+
 }

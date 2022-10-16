@@ -4,7 +4,9 @@
 <h1>Follow List</h1>
 @foreach ($users as $user)
     <div class="follow-icon">
+        <a href="{{ route('user_profile', ['id' => $user->id]) }}">
             <img src="images/{{ $user->images }}" alt="icon">
+        </a>
     </div>
 @endforeach
 

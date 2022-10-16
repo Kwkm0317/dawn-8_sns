@@ -32,6 +32,7 @@ class FollowsController extends Controller
 
         return view('follows.followList',compact('users','posts'));
     }
+
     public function followerList(){
         $follower_id = DB::table('follows')
         ->where('follower_id',Auth::id())
@@ -49,6 +50,7 @@ class FollowsController extends Controller
 
         return view('posts.followerList',compact('users','posts'));
     }
+
     public function show(User $user, Post $post, Follow $follow)
     {
         $login_user = Auth::user();

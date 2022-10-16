@@ -3,14 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\User;
 use Auth;
 
 class UsersController extends Controller
 {
     //
-    public function profile(){
-        return view('users.profile');
+    public function profile($id){
+        $user = DB::table('users')
+        ->whereIn('id', $id)
+        ->get();
+
+        return view('users.profile', [
+            'user' => $user
+        ]);
     }
     // 検索機能
     public function search(Request $request, User $user){

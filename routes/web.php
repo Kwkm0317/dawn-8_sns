@@ -35,7 +35,7 @@ Route::post('/added', 'Auth\RegisterController@added');
 //ログイン中のページ
 Route::get('/top','PostsController@index');
 
-Route::get('/profile','UsersController@profile');
+Route::post('/profile','PostsController@profile')->name('posts.profile');
 
 Route::post('/search','UsersController@search')->name('users.search');
 Route::get('/search','UsersController@search');
@@ -57,3 +57,5 @@ Route::post('/update', 'PostsController@update');
 //フォロー・フォロワー関連
 Route::delete('/un_follow/{id}', 'UsersController@unFollow')->name('un_follow');
 Route::post('/follow/{id}', 'UsersController@follow')->name('follow');
+
+Route::get('/profile/{id}','UsersController@profile')->name('user_profile');
