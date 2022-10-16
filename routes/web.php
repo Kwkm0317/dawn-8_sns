@@ -36,7 +36,7 @@ Route::post('/added', 'Auth\RegisterController@added');
 Route::get('/top','PostsController@index');
 
 // Route::get('/profile','PostsController@profile')->name('posts.profile');
-Route::post('/profile','PostsController@profile')->name('posts.profile');
+Route::post('/user_profile','PostsController@profile')->name('posts.profile');
 
 Route::post('/search','UsersController@search')->name('users.search');
 Route::get('/search','UsersController@search');

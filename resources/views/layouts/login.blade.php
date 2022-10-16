@@ -32,7 +32,7 @@
                     <ul class="dropdown-menu">
                         {{-- absoluteをつける --}}
                         <li class="panel_item"><a href="/top">ホーム</a></li>
-                        <li class="panel_item"><a href="/profile">プロフィール</a></li>
+                        <li class="panel_item"><a href="/user_profile">プロフィール</a></li>
                         <li class="panel_item"><a href="/logout">ログアウト</a></li>
                     </ul>
                     </li>
