@@ -26,9 +26,11 @@ class UsersController extends Controller
 
         $search = $query->get();
 
-        return view('users.search', compact('search', 'word'), [
+        return view('users.search', [
             'all_users' => $all_users,
             'login_user' => $login_user,
+            'search' => $search,
+            'word' => $word
             ]);
     }
 
