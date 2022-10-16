@@ -4,7 +4,7 @@
 {{--  <h2>機能を実装していきましょう。</h2>  --}}
 <form action="{{ route('users.search') }}" method="post">
     @csrf
-    <input type="search" placeholder="ユーザー名" name="search" value="@if (isset($search)) {{ $search }} @endif">
+    <input type="search" placeholder="ユーザー名" name="word" value="{{ $word }}">
     <button type="submit">検索</button>
 </form>
 

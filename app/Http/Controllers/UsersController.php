@@ -12,13 +12,23 @@ class UsersController extends Controller
     public function profile(){
         return view('users.profile');
     }
-    public function search(User $user){
+    // 検索機能
+    public function search(Request $request, User $user){
         $all_users = $user->getAllUsers(Auth::user()->id);
         $login_user = Auth::user();
 
-        return view('users.search', [
+        $word = $request->input('word');
+        $query = User::query();
+
+        if(!empty($word)) {
+            $query->where('username', 'LIKE', "%{$word}%");
+        }
+
+        $search = $query->get();
+
+        return view('users.search', compact('search', 'word'), [
             'all_users' => $all_users,
-            'login_user' => $login_user
+            'login_user' => $login_user,
             ]);
     }
 
