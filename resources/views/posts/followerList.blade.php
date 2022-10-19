@@ -4,11 +4,15 @@
 <h1>Follower List</h1>
 @foreach ($users as $user)
     <div class="follower-icon">
+        <a href="{{ route('user_profile', ['id' => $user->id]) }}">
             <img src="images/{{ $user->images }}" alt="icon">
+        </a>
     </div>
 @endforeach
 
 @foreach ($posts as $post)
+{{--  foreachでpostテーブルの中身を表示していく  --}}
+{{--  topに表示されるpostは全ユーザー分  --}}
 <div class="podt-all">
     <div class="post-info">
      <div class="user">

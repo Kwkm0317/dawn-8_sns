@@ -11,18 +11,20 @@ class UsersController extends Controller
 {
     //
     public function profile($id){
+        $login_user = Auth::user();
+
         $users = DB::table('users')
-        ->whereIn('id', $id)
-        ->get();
+        ->where('id', $id)
+        ->first(); //一つだけ持ってくる
 
         $posts = DB::table('posts')
         ->join('users','posts.user_id','=','users.id')
-        ->whereIn('user_id',$id)
+        ->where('user_id',$id)
         ->select('posts.posts','posts.created_at as created_at','users.username','users.images')
         ->get();
 
 
-        return view('users.profile', compact('posts', 'users'));
+        return view('users.profile', compact('login_user', 'posts', 'users'));
     }
     // 検索機能
     public function search(Request $request, User $user){

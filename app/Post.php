@@ -16,9 +16,4 @@ class Post extends Model
         return $this->where('user_id', $user_id)->orderBy('created_at', 'DESC')->paginate(50);
     }
 
-    // public function postStore(Int $user_id, Array $data){
-    //     $this->user_id = $user_id;
-    //     $this->posts = $data['text'];
-    //     $this->save();
-    // }
 }

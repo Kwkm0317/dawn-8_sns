@@ -24,7 +24,6 @@ class FollowsController extends Controller
 
         $posts = DB::table('posts')
         ->join('users','posts.user_id','=','users.id') //usersとpostsのテーブルを統合して検索
-        // ->where('users.id',Auth::id())
         ->whereIn('user_id',$follow_id)
         ->select('posts.posts','posts.created_at as created_at','users.username','users.images')
         ->get();

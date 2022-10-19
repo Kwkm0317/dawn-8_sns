@@ -36,24 +36,6 @@ class PostsController extends Controller
         ]);
     }
 
-    // public function followList(Post $post){
-    //     $user = Auth::user();
-    //     $follow_users = $post->getUserTimeLine($user->id);
-    //     return view('follows.followList', [
-    //         'user' => $user,
-    //         'follow_users' => $follow_users
-    //     ]);
-
-    // }
-
-    // public function followerList(Post $post){
-    //     $user = Auth::user();
-    //     $follower_users = $post->getUserTimeLine($user->id);
-    //     return view('posts.followerList', [
-    //         'user' => $user,
-    //         'follower_users' => $follower_users
-    //     ]);
-    // }
 
     public function create(){
         $user = Auth::user();
@@ -104,20 +86,38 @@ class PostsController extends Controller
     }
 
     // ログインしている人のプロフィールを表示させるためのところ
-    public function profile(){
+    // getとpostで分けたほうがいい → わける
+    public function profile()
+    {
         $login_user = Auth::user();
-        $update = DB::table('users')
-        ->where('id', $login_user->id)
-        ->update([
-            'username' => $login_user['username'],
-            'bio' => $login_user['bio'],
-            'mail' => $login_user['mail']
-        ]);
-
         return view('posts.profile', [
             'login_user' => $login_user,
-            'update' => $update
         ]);
+    }
+
+    public function updateProfile(Request $request){
+        $login_user = Auth::user();
+
+        if (empty($request->input('password'))) {
+            DB::table('users')
+            ->where('id', $login_user->id)
+            ->update([
+                'username' => $request->input('username'),
+                'bio' => $request->input('bio'),
+                'mail' => $request->input('mail')
+            ]);
+        }else{
+            DB::table('users')
+            ->where('id', $login_user->id)
+            ->update([
+                'username' => $request->input('username'),
+                'bio' => $request->input('bio'),
+                'mail' => $request->input('mail'),
+                'password' => bcrypt($request->input('password'))
+            ]);
+        }
+
+        return back();
     }
 
 }

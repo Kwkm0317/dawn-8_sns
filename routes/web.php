@@ -35,8 +35,8 @@ Route::post('/added', 'Auth\RegisterController@added');
 //ログイン中のページ
 Route::get('/top','PostsController@index');
 
-// Route::get('/profile','PostsController@profile')->name('posts.profile');
-Route::post('/user_profile','PostsController@profile')->name('posts.profile');
+Route::get('/user_profile','PostsController@profile')->name('posts.profile');
+Route::post('/update-profile','PostsController@updateProfile')->name('posts.update-profile');
 
 Route::post('/search','UsersController@search')->name('users.search');
 Route::get('/search','UsersController@search');

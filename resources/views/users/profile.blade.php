@@ -5,14 +5,29 @@
 <div class="post-info">
     <div class="user">
         <div class="u-icon">
-           <img src="images/{{ $users->images }}" alt="icon">
+           <img src="{{ asset('images/' .$users->images) }}" alt="icon">
            {{--  timelineに入っているpostテーブルのデータとuserテーブルの情報をくっつけてuserテーブルの中のimagesを表示させる  --}}
         </div>
         <div class="u-name">
             {{ $users->username }}
         </div>
-        <div class="u-mail">
+        <div class="u-bio">
             <br>{{ $users->bio }}
+        </div>
+        <div>
+            @if($login_user->isFollowing($users->id))
+                <form action="{{ route('un_follow', ['id' => $users->id]) }}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn-danger">フォロー解除</button>
+                </form>
+            @else
+            <form action="{{ route('follow', ['id' => $users->id]) }}" method="post">
+                @csrf
+                <button type="submit" class="btn-danger">フォローする</button>
+            </form>
+
+            @endif
         </div>
     </div>
 </div>
@@ -24,7 +39,7 @@
     <div class="post-info">
      <div class="user">
         <div class="u-icon">
-            <img src="images/{{ $post->images }}" alt="icon">
+            <img src="{{ asset('images/' .$post->images ) }}" alt="icon">
             {{--  timelineに入っているpostテーブルのデータとuserテーブルの情報をくっつけてuserテーブルの中のimagesを表示させる  --}}
         </div>
         <div class="u-name">{{ $post->username }}</div>

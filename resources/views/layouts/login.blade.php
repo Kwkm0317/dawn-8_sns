@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="ページの内容を表す文章" />
     <title></title>
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!--スマホ,タブレット対応-->
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!--サイトのアイコン指定-->
@@ -22,12 +22,12 @@
 <body>
     <header>
         <div id = "head">
-        <h1><a href="/top"><img src="images/main_logo.png"></a></h1>
+        <h1><a href="/top"><img src="{{ asset('images/main_logo.png') }}"></a></h1>
                 <nav class="gnav">
                     <ul class="gnav-contents">
                     <li class="menu">
                         {{-- relativeを --}}
-                        <div>{{$user->username}}さん<img class="icon" src="images/dawn.png"></div>
+                        <div>{{$user->username}}さん<img class="icon" src="{{ asset('images/dawn.png') }}"></div>
                     {{-- $userをPostsControllerのindexで定義してしまってveiwではそれを表示させるだけの方がいい --}}
                     <ul class="dropdown-menu">
                         {{-- absoluteをつける --}}
