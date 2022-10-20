@@ -5,7 +5,7 @@
 <div class="post-info">
     <div class="user">
         <div class="u-icon">
-           <img src="{{ asset('images/' .$users->images) }}" alt="icon">
+           <img src="{{ asset('images/icons/' .$users->images) }}" alt="icon">
            {{--  timelineに入っているpostテーブルのデータとuserテーブルの情報をくっつけてuserテーブルの中のimagesを表示させる  --}}
         </div>
         <div class="u-name">

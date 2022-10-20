@@ -5,7 +5,7 @@
 @foreach ($users as $user)
     <div class="follow-icon">
         <a href="{{ route('user_profile', ['id' => $user->id]) }}">
-            <img src="images/{{ $user->images }}" alt="icon">
+            <img src="images/icons/{{ $user->images }}" alt="icon">
         </a>
     </div>
 @endforeach
@@ -18,7 +18,7 @@
     <div class="post-info">
      <div class="user">
         <div class="u-icon">
-            <img src="images/{{ $post->images }}" alt="icon">
+            <img src="images/icons/{{ $post->images }}" alt="icon">
             {{--  timelineに入っているpostテーブルのデータとuserテーブルの情報をくっつけてuserテーブルの中のimagesを表示させる  --}}
         </div>
         <div class="u-name">{{ $post->username }}</div>

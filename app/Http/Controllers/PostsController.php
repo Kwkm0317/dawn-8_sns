@@ -27,6 +27,7 @@ class PostsController extends Controller
         ->where('user_id',$user->id)
         ->orWhereIn('user_id',$follow_id)
         ->select('posts.id', 'posts.user_id', 'posts.posts','posts.created_at as created_at','users.username','users.images')
+        ->orderBy('posts.created_at', 'desc')
         ->get();
 
         // $timelines = $post->getUserTimeLine($user->id);
@@ -45,7 +46,7 @@ class PostsController extends Controller
         ]);
     }
 
-    public function store(Request $request, Post $post){
+    public function store(Request $request){
         $user = Auth::user();
         $data = $request->all();
         $validator = Validator::make($data,[
@@ -98,25 +99,43 @@ class PostsController extends Controller
     public function updateProfile(Request $request){
         $login_user = Auth::user();
 
-        if (empty($request->input('password'))) {
-            DB::table('users')
-            ->where('id', $login_user->id)
-            ->update([
-                'username' => $request->input('username'),
-                'bio' => $request->input('bio'),
-                'mail' => $request->input('mail')
-            ]);
-        }else{
-            DB::table('users')
+        $data = $request->all();
+        $validator = Validator::make($data, [
+            'username' => 'required|string|max:255',
+            'mail' => 'required|string|email|max:255',
+        ],
+        [
+            'username.required' => '必須項目です',
+            'mail.required' => '必須項目です',
+            'mail.email' => 'メールアドレスではありません',
+        ]);
+        $validator->validate();
+
+
+        DB::table('users')
             ->where('id', $login_user->id)
             ->update([
                 'username' => $request->input('username'),
                 'bio' => $request->input('bio'),
                 'mail' => $request->input('mail'),
-                'password' => bcrypt($request->input('password'))
+        ]);
+        if (!empty($request->input('password'))) {
+            DB::table('users')
+                ->where('id', $login_user->id)
+                ->update([
+                    'password' => bcrypt($request->input('password'))
             ]);
         }
 
+        if (!empty($request->file('users_icon'))) {
+            $img_name = $request->file('users_icon')->getClientOriginalName();
+            $request->file('users_icon')->storeAs('public/upload', $img_name);
+            DB::table('users')
+                ->where('id', $login_user->id)
+                ->update([
+                    'images' => $img_name
+            ]);
+        }
         return back();
     }
 

@@ -12,6 +12,7 @@
 <table>
     <tr>
         <td class="u-icon">
+            <a href="{{ route('user_profile', ['id' => $user->id]) }}">
             <img src="images/{{ $user->images }}" alt="icon">
         </td>
         <td class="u-name">{{$user->username}}</td>

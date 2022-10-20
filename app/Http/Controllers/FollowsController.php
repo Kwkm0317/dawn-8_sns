@@ -26,6 +26,7 @@ class FollowsController extends Controller
         ->join('users','posts.user_id','=','users.id') //usersとpostsのテーブルを統合して検索
         ->whereIn('user_id',$follow_id)
         ->select('posts.posts','posts.created_at as created_at','users.username','users.images')
+        ->orderBy('posts.created_at', 'desc')
         ->get();
 
 
@@ -45,6 +46,7 @@ class FollowsController extends Controller
         ->join('users','posts.user_id','=','users.id')
         ->whereIn('user_id',$follower_id)
         ->select('posts.posts','posts.created_at as created_at','users.username','users.images')
+        ->orderBy('posts.created_at', 'desc')
         ->get();
 
         return view('posts.followerList',compact('users','posts'));
