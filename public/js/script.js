@@ -3,8 +3,9 @@
 $('.menu').find('.dropdown-menu').hide();
 //.menuをclickした場合
 $('.menu').click(function () {
-  //.dropdown-menuをslideDown
-  $(".dropdown-menu:not(:animated)", this).slideToggle(300);
+//.dropdown-menuをslideDown
+    $(this).toggleClass('active');
+    $(".dropdown-menu:not(:animated)", this).slideToggle(300);
 });
 
 // 更新のモーダルウィンドウ
@@ -17,8 +18,6 @@ $(function () {
         return false;
       });
     });
-    // $('.modalClose').on('click', function () {
-    //   $('.hide-area').fadeOut();
-    //   return false;
-    // });
-  });
+});
+
+

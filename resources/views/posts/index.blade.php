@@ -16,38 +16,41 @@
 {{--  topに表示されるpostは全ユーザー分  --}}
 <div class="podt-all">
     <div class="post-info">
-     <div class="user">
-        <div class="u-icon">
-            <img src="images/{{ $timeline->images }}" alt="icon">
-            {{--  timelineに入っているpostテーブルのデータとuserテーブルの情報をくっつけてuserテーブルの中のimagesを表示させる  --}}
+        <div class="user">
+            <div class="u-icon">
+                <img class="u-icon" src="{{ asset('/storage/upload/' .$timeline->images) }}" alt="icon">
+                {{--  timelineに入っているpostテーブルのデータとuserテーブルの情報をくっつけてuserテーブルの中のimagesを表示させる  --}}
+            </div>
+            <p class="u-name">{{ $timeline->username }}</p>
+            <p class="c-time">{{ $timeline->created_at }}</@>
         </div>
-        <div class="u-name">{{ $timeline->username }}</div>
-     </div>
-        <div class="c-time">{{ $timeline->created_at }}</div>
     </div>
-    <div class="post"><br>{{ $timeline->posts }}</div>
-     <div class="upd-post">
-      <a href="" class="modalopen" data-target="{{ $timeline->id }}">
-        <img src="images/edit.png" alt="update">
-      </a>
-       <div id="{{ $timeline->id }}" class="hide-area">
-        <form action="/update" method="POST">
-        @csrf
-            <input type="text" name="post" value="{{ $timeline->posts }}">
-            <input type="hidden" name="id" value="{{ $timeline->id }}">
-            <input type="image" img src="images/edit.png" alt="update">
-        </form>
-      </div>
-     </div>
-    <div class="del-post">
-        <form class="btn-danger" action="/delete" method="post" onclick="return confirm('このつぶやきを削除します。よろしいでしょうか？')">
-            @method('delete')
-            @csrf
-            <input type="hidden" name="delete" value="{{ $timeline->id }}">
-            {{--  ↑$timelineに格納してあるidの値をdeleteという名前で送っている　 --}}
-            <input type="image" src="images/trash_h.png" alt="delete">
-        </form>
+    <br>
+    <p class="post">{{ $timeline->posts }}</p>
+    <div class="edit">
+        <div class="upd-post">
+            <a href="" class="modalopen" data-target="{{ $timeline->id }}">
+                <img class="i-icon" src="images/edit.png" alt="update">
+            </a>
+            <div id="{{ $timeline->id }}" class="hide-area">
+                <form action="/update" method="POST">
+                @csrf
+                    <input type="text" name="post" value="{{ $timeline->posts }}">
+                    <input type="hidden" name="id" value="{{ $timeline->id }}">
+                    <input class="i-icon edit" type="image" img src="images/edit.png" alt="update">
+                </form>
+            </div>
+        </div>
+        <div class="del-post">
+            <form class="btn-danger" action="/delete" method="post" onclick="return confirm('このつぶやきを削除します。よろしいでしょうか？')">
+                @method('delete')
+                @csrf
+                <input type="hidden" name="delete" value="{{ $timeline->id }}">
+                {{--  ↑$timelineに格納してあるidの値をdeleteという名前で送っている　 --}}
+                <input class="i-icon edit" type="image" src="images/trash_h.png" alt="delete" >
+            </form>
 
+        </div>
     </div>
 </div>
 

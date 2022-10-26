@@ -7,7 +7,7 @@
     <form action="{{ route('posts.update-profile') }}" method="post" enctype="multipart/form-data">
     @csrf
         <div class="u-icon">
-            <img src="{{ asset('/storage/upload/' . $login_user->images) }}" alt="icon">
+            <img class="u-icon" src="{{ asset('/storage/upload/' . $login_user->images) }}" alt="icon">
             {{--  <input type="submit" value="アップロード">  --}}
                 {{--  timelineに入っているpostテーブルのデータとuserテーブルの情報をくっつけてuserテーブルの中のimagesを表示させる  --}}
         </div>

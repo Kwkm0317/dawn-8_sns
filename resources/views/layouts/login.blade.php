@@ -22,21 +22,27 @@
 <body>
     <header>
         <div id = "head">
-        <h1><a href="/top"><img src="{{ asset('images/main_logo.png') }}"></a></h1>
-                <nav class="gnav">
+            <h1 class="top">
+                <a href="/top"><img class="main-logo" src="{{ asset('images/main_logo.png') }}"></a>
+            </h1>
+                <div class="gnav">
                     <ul class="gnav-contents">
                     <li class="menu">
                         {{-- relativeを --}}
-                        <div>{{$user->username}}さん<img class="icon" src="{{ asset('images/dawn.png') }}"></div>
+                        <div class="user_menu">
+                            {{$user->username}}さん
+                            <div class="openbtn2"><span></span><span></span></div>
+                            <img class="u-icon" src="{{ asset('/storage/upload/'.$user->images ) }}">
+                        </div>
                     {{-- $userをPostsControllerのindexで定義してしまってveiwではそれを表示させるだけの方がいい --}}
                     <ul class="dropdown-menu">
                         {{-- absoluteをつける --}}
-                        <li class="panel_item"><a href="/top">ホーム</a></li>
-                        <li class="panel_item"><a href="/user_profile">プロフィール</a></li>
-                        <li class="panel_item"><a href="/logout">ログアウト</a></li>
+                        <li class="panel_item"><a class="panel_item" href="/top">Home</a></li>
+                        <li class="panel_item"><a class="panel_item" href="/user_profile">プロフィール編集</a></li>
+                        <li class="panel_item"><a class="panel_item" href="/logout">ログアウト</a></li>
                     </ul>
                     </li>
-                </nav>
+                </div>
         </div>
     </header>
     <div id="row">
@@ -45,19 +51,17 @@
         </div>
         <div id="side-bar">
             <div id="confirm">
-                <p>{{$user->username}}さんの</p>
+                <p class="follower">{{$user->username}}さんの</p>
                 <div>
-                <p>フォロー数</p>
-                <p>{{$follow_count}}名</p>
+                <p class="follower">　フォロー数　　　{{$follow_count}}名</p>
                 </div>
                 <p class="btn"><a href="/follow-list">フォローリスト</a></p>
                 <div>
-                <p>フォロワー数</p>
-                <p>{{$follower_count}}名</p>
+                <p class="follower">　フォロワー数　　{{$follower_count}}名</p>
                 </div>
                 <p class="btn"><a href="/follower-list">フォロワーリスト</a></p>
             </div>
-            <p class="btn"><a href="/search">ユーザー検索</a></p>
+            <p class="search-btn btn"><a href="/search">ユーザー検索</a></p>
         </div>
     </div>
     <footer>

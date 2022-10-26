@@ -1,30 +1,26 @@
 @extends('layouts.login')
 
 @section('content')
-<h1>Follower List</h1>
-@foreach ($users as $user)
-    <div class="follower-icon">
+<div class="f-icon">
+    <h1 class="f-list">Follower List</h1>
+    @foreach ($users as $user)
         <a href="{{ route('user_profile', ['id' => $user->id]) }}">
-            <img src="images/icons/{{ $user->images }}" alt="icon">
+            <img class="u-icon" src="{{ asset('/storage/upload/' .$user->images) }}" alt="icon">
         </a>
-    </div>
-@endforeach
+    @endforeach
+</div>
 
 @foreach ($posts as $post)
 {{--  foreachでpostテーブルの中身を表示していく  --}}
 {{--  topに表示されるpostは全ユーザー分  --}}
 <div class="podt-all">
-    <div class="post-info">
-     <div class="user">
-        <div class="u-icon">
-            <img src="images/icons/{{ $post->images }}" alt="icon">
-            {{--  timelineに入っているpostテーブルのデータとuserテーブルの情報をくっつけてuserテーブルの中のimagesを表示させる  --}}
-        </div>
-        <div class="u-name">{{ $post->username }}</div>
-     </div>
-        <div class="c-time">{{ $post->created_at }}</div>
+    <div class="user">
+        <img class="u-icon" src="{{ asset('/storage/upload/' .$post->images) }}" alt="icon">
+        {{--  timelineに入っているpostテーブルのデータとuserテーブルの情報をくっつけてuserテーブルの中のimagesを表示させる  --}}
+        <p class="u-name">{{ $post->username }}</p>
+        <p class="c-time">{{ $post->created_at }}</p>
     </div>
-    <div class="post"><br>{{ $post->posts }}</div>
+    <p class="post"><br>{{ $post->posts }}</p>
 </div>
 
 @endforeach
