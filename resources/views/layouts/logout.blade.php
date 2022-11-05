@@ -21,13 +21,13 @@
 </head>
 <body>
     <header>
-        <h1><img src="images/main_logo.png"></h1>
-        <p>Social Network Service</p>
+        <h1 class="logout-page"><img src="images/main_logo.png"></h1>
+        <h2 class="logout-page">Social Network Service</h2>
     </header>
     <div id="container">
         @yield('content')
     </div >
-    <script src="JavaScriptファイルのURL"></script>
-    <script src="JavaScriptファイルのURL"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset ('js/script.js') }}"></script>
 </body>
 </html>

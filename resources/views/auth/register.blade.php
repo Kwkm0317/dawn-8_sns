@@ -4,11 +4,11 @@
 
 {!! Form::open() !!}
 
-<div class="container">
-<h2 class="page-header">新規ユーザー登録</h2>
+<div class="row">
+<h2 class="layout">新規ユーザー登録</h2>
 
 
-<h3>{{ Form::label('UserName') }}</h3>
+<h3 class="">{{ Form::label('UserName') }}</h3>
 {{ Form::text('username',null,['class' => 'input', 'placeholder' => 'dawntown']) }}
 @if($errors->has('username')) {{-- エラーが$errorsに入る。'username'のエラー文があれば持ってきて表示するよ --}}
 <div class="error">
@@ -41,10 +41,9 @@
 </div>
 @endif
 
-<br>
-{{ Form::submit('REGISTER') }}
-
-<p><a href="/login">ログイン画面へ戻る</a></p>
+<div>
+z</div>
+<p><a class="layout" href="/login">ログイン画面へ戻る</a></p>
 
 {!! Form::close() !!}
 </div>

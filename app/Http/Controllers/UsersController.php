@@ -9,19 +9,24 @@ use Auth;
 
 class UsersController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
     //
     public function profile($id){
         $login_user = Auth::user();
 
         $users = DB::table('users')
-        ->where('id', $id)
-        ->first(); //一つだけ持ってくる
+            ->where('id', $id)
+            ->first(); //一つだけ持ってくる
 
         $posts = DB::table('posts')
-        ->join('users','posts.user_id','=','users.id')
-        ->where('user_id',$id)
-        ->select('posts.posts','posts.created_at as created_at','users.username','users.images')
-        ->get();
+            ->join('users','posts.user_id','=','users.id')
+            ->where('user_id',$id)
+            ->select('posts.posts','posts.created_at as created_at','users.username','users.images')
+            ->get();
 
 
         return view('users.profile', compact('login_user', 'posts', 'users'));
@@ -32,13 +37,13 @@ class UsersController extends Controller
         $login_user = Auth::user();
 
         $word = $request->input('word');
-        $query = User::query();
+        $user = DB::table('users');
 
         if(!empty($word)) {
-            $query->where('username', 'LIKE', "%{$word}%");
+            $user->where('username', 'LIKE', "%{$word}%");
         }
 
-        $search = $query->get();
+        $search = $user->get();
 
         return view('users.search', [
             'all_users' => $all_users,

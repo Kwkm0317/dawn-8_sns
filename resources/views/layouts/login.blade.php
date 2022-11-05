@@ -60,6 +60,8 @@
                 <p class="follower">　フォロワー数　　{{$follower_count}}名</p>
                 </div>
                 <p class="btn"><a href="/follower-list">フォロワーリスト</a></p>
+                {{--  レビュー用ボタン  --}}
+                <p class="btn btn_test"><a href="/test">ユーザーのつぶやき一覧</a></p>
             </div>
             <p class="search-btn btn"><a href="/search">ユーザー検索</a></p>
         </div>

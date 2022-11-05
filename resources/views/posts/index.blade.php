@@ -17,29 +17,30 @@
 <div class="podt-all">
     <div class="post-info">
         <div class="user">
-            <div class="u-icon">
-                <img class="u-icon" src="{{ asset('/storage/upload/' .$timeline->images) }}" alt="icon">
-                {{--  timelineに入っているpostテーブルのデータとuserテーブルの情報をくっつけてuserテーブルの中のimagesを表示させる  --}}
-            </div>
+            <img class="u-icon" src="{{ asset('/storage/upload/' .$timeline->images) }}" alt="icon">
+            {{--  timelineに入っているpostテーブルのデータとuserテーブルの情報をくっつけてuserテーブルの中のimagesを表示させる  --}}
             <p class="u-name">{{ $timeline->username }}</p>
             <p class="c-time">{{ $timeline->created_at }}</@>
         </div>
     </div>
     <br>
     <p class="post">{{ $timeline->posts }}</p>
+    <div class="overlay" id="js-overlay"></div>
     <div class="edit">
-        <div class="upd-post">
-            <a href="" class="modalopen" data-target="{{ $timeline->id }}">
-                <img class="i-icon" src="images/edit.png" alt="update">
-            </a>
-            <div id="{{ $timeline->id }}" class="hide-area">
-                <form action="/update" method="POST">
-                @csrf
-                    <input type="text" name="post" value="{{ $timeline->posts }}">
-                    <input type="hidden" name="id" value="{{ $timeline->id }}">
-                    <input class="i-icon edit" type="image" img src="images/edit.png" alt="update">
-                </form>
+        <div id="js-modal" class="modal">
+            <div class="upd-post modal-close__wrap">
+                <div id="{{ $timeline->id }}" class="hide-area">
+                    <form action="/update" method="POST">
+                    @csrf
+                        <input type="text" name="post" value="{{ $timeline->posts }}">
+                        <input type="hidden" name="id" value="{{ $timeline->id }}">
+                        <input id="js-close" class="modal-close i-icon edit" type="image" img src="images/edit.png" alt="update">
+                    </form>
+                </div>
             </div>
+            <a href="" class="modal-open" data-target="{{ $timeline->id }}">
+                <img id="js-open" class="i-icon update-icon" src="images/edit.png" alt="update">
+            </a>
         </div>
         <div class="del-post">
             <form class="btn-danger" action="/delete" method="post" onclick="return confirm('このつぶやきを削除します。よろしいでしょうか？')">

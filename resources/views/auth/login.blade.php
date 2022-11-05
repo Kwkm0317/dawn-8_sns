@@ -5,9 +5,9 @@
 {!! Form::open() !!}
 <div class="container">
   <div class="row">
-    <p>DAWNSNSへようこそ</p>
+    <h3 class="layout">DAWNSNSへようこそ</h3>
 
-    {{ Form::label('e-mail') }}
+    {{ Form::label('e-mail',) }}
     <br>
     {{ Form::text('mail',null,['class' => 'input']) }}
     <br>
@@ -15,9 +15,9 @@
     <br>
     {{ Form::password('password',['class' => 'input']) }}
     <br>
-    {{ Form::submit('ログイン') }}
+    {{ Form::submit('LOGIN') }}
 
-    <p><a href="/register">新規ユーザーの方はこちら</a></p>
+    <p><a class="layout" href="/register">新規ユーザーの方はこちら</a></p>
 
     {!! Form::close() !!}
   </div>

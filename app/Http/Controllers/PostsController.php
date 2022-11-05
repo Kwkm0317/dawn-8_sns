@@ -11,28 +11,29 @@ class PostsController extends Controller
 {
     //
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
     public function index(){
         $user = Auth::user();
 
         $follow_id = DB::table('follows')
-        ->where('follow_id',Auth::id())
-        ->pluck('follower_id'); //getだと全データ取得してしまうので、指定したカラムの情報のみ取得したいときはpluckを使う
+            ->where('follow_id',Auth::id())
+            ->pluck('follower_id'); //getだと全データ取得してしまうので、指定したカラムの情報のみ取得したいときはpluckを使う
 
         $timelines = DB::table('posts')
-        ->join('users','posts.user_id','=','users.id') //usersとpostsのテーブルを統合して検索
-        ->where('user_id',$user->id)
-        ->orWhereIn('user_id',$follow_id)
-        ->select('posts.id', 'posts.user_id', 'posts.posts','posts.created_at as created_at','users.username','users.images')
-        ->orderBy('posts.created_at', 'desc')
-        ->get();
+            ->join('users','posts.user_id','=','users.id') //usersとpostsのテーブルを統合して検索
+            ->where('user_id',$user->id)
+            ->orWhereIn('user_id',$follow_id)
+            ->select('posts.id', 'posts.user_id', 'posts.posts','posts.created_at as created_at','users.username','users.images')
+            ->orderBy('posts.created_at', 'desc')
+            ->get();
 
         // $timelines = $post->getUserTimeLine($user->id);
         return view('posts.index', [
-            'user' => $user,
+            // 'user' => $user,
             'timelines' => $timelines
         ]);
     }
@@ -79,10 +80,10 @@ class PostsController extends Controller
         $up_id = $request->input('id');
         $up_post = $request->input('post');
             DB::table('posts')
-            ->where('id', $up_id)
-            ->update(
-                ['posts' => $up_post]
-            );
+                ->where('id', $up_id)
+                ->update(
+                    ['posts' => $up_post]
+                );
         return redirect('/top');
     }
 
@@ -138,5 +139,22 @@ class PostsController extends Controller
         }
         return back();
     }
+
+    public function test(){
+        $user = Auth::user();
+
+        $timelines = DB::table('posts')
+            ->join('users','posts.user_id','=','users.id') //usersとpostsのテーブルを統合して検索
+            ->where('user_id',$user->id)
+            ->select('posts.id', 'posts.user_id', 'posts.posts','posts.created_at as created_at','users.username','users.images')
+            ->orderBy('posts.created_at', 'desc')
+            ->get();
+
+        return view('posts.test', [
+            'timelines' => $timelines
+        ]);
+    }
+
+
 
 }

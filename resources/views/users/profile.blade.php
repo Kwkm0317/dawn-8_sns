@@ -3,10 +3,8 @@
 
 @section('content')
     <div class="follow-user">
-        <div class="u-icon">
-           <img class="u-icon" src="{{ asset('/storage/upload/' .$users->images) }}" alt="icon">
-           {{--  timelineに入っているpostテーブルのデータとuserテーブルの情報をくっつけてuserテーブルの中のimagesを表示させる  --}}
-        </div>
+        <img class="u-icon" src="{{ asset('/storage/upload/' .$users->images) }}" alt="icon">
+        {{--  timelineに入っているpostテーブルのデータとuserテーブルの情報をくっつけてuserテーブルの中のimagesを表示させる  --}}
         <div class="u-name">Name　
             {{ $users->username }}
         </div>
@@ -33,18 +31,18 @@
 @foreach ($posts as $post)
 {{--  foreachでpostテーブルの中身を表示していく  --}}
 {{--  topに表示されるpostは全ユーザー分  --}}
-<div class="podt-all">
-     <div class="user">
-        <div class="u-icon">
-            <img class="u-icon" src="{{ asset('/storage/upload/' .$post->images ) }}" alt="icon">
-            {{--  timelineに入っているpostテーブルのデータとuserテーブルの情報をくっつけてuserテーブルの中のimagesを表示させる  --}}
+    <div class="podt-all">
+        <div class="user">
+            <div class="u-icon">
+                <img class="u-icon" src="{{ asset('/storage/upload/' .$post->images ) }}" alt="icon">
+                {{--  timelineに入っているpostテーブルのデータとuserテーブルの情報をくっつけてuserテーブルの中のimagesを表示させる  --}}
+            </div>
+            <p class="u-name">{{ $post->username }}</p>
+            <p class="c-time">{{ $post->created_at }}</p>
         </div>
-        <p class="u-name">{{ $post->username }}</p>
-        <p class="c-time">{{ $post->created_at }}</p>
-    </div>
 
-    <p class="post"><br>{{ $post->posts }}</p>
-</div>
+        <p class="post"><br>{{ $post->posts }}</p>
+    </div>
 
 @endforeach
 

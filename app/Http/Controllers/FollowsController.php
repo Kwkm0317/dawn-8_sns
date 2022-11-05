@@ -11,45 +11,50 @@ use App\Follow;
 
 class FollowsController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
 
     public function followList(){
 
-        $follow_id = DB::table('follows')
-        ->where('follow_id',Auth::id())
-        ->pluck('follower_id'); //getだと全データ取得してしまうので、指定したカラムの情報のみ取得したいときはpluckを使う
+        $follower_id = DB::table('follows')
+            ->where('follow_id',Auth::id())
+            ->pluck('follower_id'); //getだと全データ取得してしまうので、指定したカラムの情報のみ取得したいときはpluckを使う
 
-        $users = DB::table('users') //ここはiconのimagesを持ってくるためだけにuser情報を取得している
-        ->whereIn('id',$follow_id)
-        ->get();
+        // $users = DB::table('users') //ここはiconのimagesを持ってくるためだけにuser情報を取得している
+        //     ->whereIn('id',$follow_id)
+        //     ->get();
 
         $posts = DB::table('posts')
-        ->join('users','posts.user_id','=','users.id') //usersとpostsのテーブルを統合して検索
-        ->whereIn('user_id',$follow_id)
-        ->select('posts.posts','posts.created_at as created_at','users.username','users.images')
-        ->orderBy('posts.created_at', 'desc')
-        ->get();
+            ->join('users','posts.user_id','=','users.id') //usersとpostsのテーブルを統合して検索
+            ->whereIn('user_id',$follower_id)
+            ->select('posts.posts','posts.created_at as created_at','users.id','users.username','users.images')
+            ->orderBy('posts.created_at', 'desc')
+            ->get();
 
 
-        return view('follows.followList',compact('users','posts'));
+        return view('follows.followList',compact('posts'));
     }
 
     public function followerList(){
-        $follower_id = DB::table('follows')
-        ->where('follower_id',Auth::id())
-        ->pluck('follow_id');
+        $follow_id = DB::table('follows')
+            ->where('follower_id',Auth::id())
+            ->pluck('follow_id');
 
-        $users = DB::table('users')
-        ->whereIn('id',$follower_id)
-        ->get();
+        // $users = DB::table('users')
+        //     ->whereIn('id',$follower_id)
+        //     ->get();
 
         $posts = DB::table('posts')
-        ->join('users','posts.user_id','=','users.id')
-        ->whereIn('user_id',$follower_id)
-        ->select('posts.posts','posts.created_at as created_at','users.username','users.images')
-        ->orderBy('posts.created_at', 'desc')
-        ->get();
+            ->join('users','posts.user_id','=','users.id')
+            ->whereIn('user_id',$follow_id)
+            ->select('posts.posts','posts.created_at as created_at','users.id','users.username','users.images')
+            ->orderBy('posts.created_at', 'desc')
+            ->get();
 
-        return view('posts.followerList',compact('users','posts'));
+        return view('posts.followerList',compact('posts'));
     }
 
     public function show(User $user, Post $post, Follow $follow)

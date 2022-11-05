@@ -3,7 +3,7 @@
 @section('content')
 <div class="f-icon">
     <h1 class="f-list">Follow List</h1>
-    @foreach ($users as $user)
+    @foreach ($posts->unique('id') as $user)  {{--  被りがないようにunique('id')を記述している  --}}
         <a href="{{ route('user_profile', ['id' => $user->id]) }}">
             <img class="u-icon" src="{{ asset('/storage/upload/' .$user->images) }}" alt="icon">
         </a>

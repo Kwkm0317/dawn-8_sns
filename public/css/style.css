@@ -31,6 +31,8 @@ a {
     width: 154px;
 }
 
+
+
 /* main content */
 /* div{
     width: fit-content;
@@ -49,7 +51,7 @@ a {
 
 #side-bar {
     padding: 10px;
-    flex: 0 0 19%;
+    /* flex: 0 0 19%; */
     border-left: solid 2px #cccccc;
 }
 
@@ -123,7 +125,7 @@ td {
 .user_menu {
     display: flex;
     align-items: center;
-    margin-top: 20px;
+    margin: 20px 10px auto 10px;
 }
 
 li {
@@ -145,6 +147,8 @@ li.panel_item:hover {
     /* display: right; */
     text-align: center;
     cursor: pointer;
+    position: absolute;
+    z-index: 1;
 }
 
 .gnav .gnav-contents .menu div {
@@ -210,6 +214,7 @@ li.panel_item:hover {
     transform: translateY(-6px) rotate(60deg);
     width: 35%;
 }
+
 
 /* つぶやきフォーム  ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー */
 .post-form {
@@ -318,4 +323,36 @@ border-bottom: solid 4px #cccccc;
     font-size: 30px;
     color: #696969;
     padding-bottom: 10px;
+}
+
+/* モーダルウィンドウ関連 ------------------------------------ */
+/* .overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: grey;
+    opacity: .6;
+    display: none;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.modal-close__wrap {
+    position: absolute;
+    right: 40px;
+    top: 20px;
+}
+
+.overlay.open {
+    display: block;
+}
+
+  .modal.open {
+    display: block;
+} */
+
+.btn_test {
+    font-size: 5px;
 }
